@@ -1,12 +1,12 @@
 ##AI START
-import Rules
+import rules
 
 class Board(object):
     def __init__(self):
         self.board = [['.' for x in range(0,19)] for cell in range(0,19)]
 
     def add_move(self, move):
-        if Rules.is_legal_move(self, move):
+        if rules.is_legal_move(self, move):
             self.board[move.x][move.y] = move.player
             return True
         else:

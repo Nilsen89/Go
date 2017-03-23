@@ -1,13 +1,12 @@
 #RUNNER
 
-from AllGroups import AllGroups
-from SGF import SGFReader
-from Board import Board
-from Group import Group
-from Move import Move
+from allGroups import AllGroups
+from sfg import SGFReader
+from board import Board
+from move import Move
 import time
-import Rules
-import Testing
+import rules
+import testing
 import os
 
 def cls():
@@ -25,7 +24,7 @@ def main():
 
     while(True):
 
-        time.sleep(.05)
+        time.sleep(.5)
         #cls()
 
         #print(len(all_groups.groups))
@@ -49,22 +48,20 @@ def main():
         if not board.add_move(move):
             continue
 
-        if not all_groups.move_part_of_any_group(move, board):
-            all_groups.add_group(Group([move], player, board))
+        all_groups.move_part_of_any_group(move, board)
 
-        all_groups.update(move, board)
+        #Do not think this is needed!
+        #all_groups.update(move, board)
 
         if player == 'X': player = 'O'
         else: player = 'X'
 
         #Testing
         #Testing.set_group_numbers(board, all_groups, True)
-        if move == Move(4,3, 'X'):
-                Testing.print_group_to_move(board, all_groups, move)
-                break
+        #if move == Move(4,3, 'X'):
+        #        Testing.print_group_to_move(board, all_groups, move)
+        #        break
 
         board.print_board()
- 
-
 
 main()

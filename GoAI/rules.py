@@ -1,7 +1,7 @@
 ##RULES
 
-from Move import Move
-from Group import Group
+from move import Move
+#from group import Group
 
 def is_legal_move(board, move):
     if not is_empty(board, move):

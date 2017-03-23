@@ -1,6 +1,6 @@
 ##GROUP
 
-import Rules
+import rules
 
 class Group(object):
     def __init__(self, group, player, board):
@@ -10,8 +10,10 @@ class Group(object):
         if player == 'X': self.other_player = 'O'
         else: self.other_player = 'X'
 
-        self.liberties = self.find_liberties(board)
-        self.free_liberties = self.find_free_liberties(board)
+        self.update(board)
+
+        #self.liberties = self.find_liberties(board)
+        #self.free_liberties = self.find_free_liberties(board)
 
     def add_move(self, move, board):
         self.group.append(move)
@@ -20,7 +22,7 @@ class Group(object):
     def find_liberties(self, board):
         liberties = []
         for move in self.group:
-            neighbours = Rules.get_neighbours(move)
+            neighbours = rules.get_neighbours(move)
             for neighbour in neighbours:
                 if board.get_cell(neighbour) != self.player:
                     liberties.append(neighbour)
@@ -40,7 +42,7 @@ class Group(object):
         if not self.free_liberties:
             self.kill_group(board)
             return False
-        else: return True
+        return True
 
     def kill_group(self, board):
         for move in self.group:
