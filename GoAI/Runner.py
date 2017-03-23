@@ -7,6 +7,7 @@ from Group import Group
 from Move import Move
 import time
 import Rules
+import Testing
 import os
 
 def cls():
@@ -20,13 +21,12 @@ def main():
 
     reader = SGFReader("test.sgf")
     counter = 0
-    SFG = False
+    SFG = True
 
     while(True):
 
-        time.sleep(.5)
-        cls()
-        board.print_board()
+        time.sleep(.05)
+        #cls()
 
         #print(len(all_groups.groups))
         #for group in all_groups.groups:
@@ -56,5 +56,15 @@ def main():
 
         if player == 'X': player = 'O'
         else: player = 'X'
+
+        #Testing
+        #Testing.set_group_numbers(board, all_groups, True)
+        if move == Move(4,3, 'X'):
+                Testing.print_group_to_move(board, all_groups, move)
+                break
+
+        board.print_board()
  
+
+
 main()
