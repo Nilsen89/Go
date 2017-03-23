@@ -16,20 +16,14 @@ class AllGroups(object):
         self.groups.remove(group)
 
     def move_part_of_any_group(self, move, board):
+
         groups = []
         player_groups = []
         other_groups = []
         for group in self.groups:
-            if move in group.liberties:
-                print("adding close lib group")
-                print("this clse group is: ")
-                for move in group.group:
-                    print(move)
-                groups.append(group)
-        
-        if len(groups) == 0:
-            self.add_group(Group([move], move.player, board))
-            return
+            for lib in group.liberties:
+                if lib.x == move.x and lib.y == move.y:
+                    groups.append(group)
 
         for group in groups:
             if group.player == move.player:
@@ -39,15 +33,18 @@ class AllGroups(object):
 
         if len(player_groups) == 1:
             self.add_move_to_group(move, player_groups[0], board)
+
         elif len(player_groups) > 1:
-            self.join_groups(player_groups, board, move)
-        print(len(other_groups))    
+            self.join_groups(player_groups, board, move) 
+
         if other_groups:
-            print("other group found")
             for group in other_groups:
                 if not group.update(board):
-                    print("returned true")
                     self.remove_group(group)
+        if len(player_groups) == 0:
+            self.add_group(Group([move], move.player, board))
+
+        
     
     def join_groups(self, groups, board, move):
         joined_groups = None
@@ -65,7 +62,7 @@ class AllGroups(object):
             #Slow
             if move in group.group:
                 continue
-            for lib in group.free_liberties:
+            for lib in group.liberties:
                 if move.x == lib.x and move.y == lib.y:
                     if not group.update(board):
                         self.groups.remove(group)

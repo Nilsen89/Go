@@ -4,6 +4,7 @@ from allGroups import AllGroups
 from sfg import SGFReader
 from board import Board
 from move import Move
+import sys
 import time
 import rules
 import testing
@@ -24,8 +25,7 @@ def main():
 
     while(True):
 
-        time.sleep(.5)
-        #cls()
+        time.sleep(.05)
 
         #print(len(all_groups.groups))
         #for group in all_groups.groups:
@@ -33,12 +33,16 @@ def main():
 
         if SFG:
             move = Move(reader.moves[counter][0], reader.moves[counter][1], player)
-            print(move)
-            counter = counter + 1
+            if counter < len(reader.moves)-1:
+                counter = counter + 1
+            else:
+                cls()
+                board.print_board()
+                sys.exit("SGF DONE!")
         else: 
             print("PLAYER MOVE: " + player)
             player_input = input("Enter move ex. 4:4: ")
-            player_input = Rules.check_input(player_input)
+            player_input = rules.check_input(player_input)
             if not player_input:
                 print("False move")
                 continue
@@ -51,17 +55,22 @@ def main():
         all_groups.move_part_of_any_group(move, board)
 
         #Do not think this is needed!
-        #all_groups.update(move, board)
+        all_groups.update(move, board)
 
         if player == 'X': player = 'O'
         else: player = 'X'
 
         #Testing
-        #Testing.set_group_numbers(board, all_groups, True)
-        #if move == Move(4,3, 'X'):
-        #        Testing.print_group_to_move(board, all_groups, move)
-        #        break
+        #print("FREE LIB OF MOVE 1:")
+        #for lib in all_groups.groups[0].liberties:
+        #    print(lib)
+        #print("#######################")
 
+        testing.set_group_numbers(board, all_groups, False)
+        #if move == Move(4,3, 'X'):
+        #        testing.print_group_to_move(board, all_groups, move)
+        #        break
+        cls()
         board.print_board()
 
 main()

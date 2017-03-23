@@ -6,8 +6,8 @@ from move import Move
 def is_legal_move(board, move):
     if not is_empty(board, move):
         return False
-    if is_self_atari(board, move):
-        return False
+    #if is_self_atari(board, move):
+    #    return False
     return True
 
 def get_neighbours(move):
@@ -17,9 +17,9 @@ def get_neighbours(move):
             continue
         offset_x = move.x + offset
         offset_y = move.y + offset
-        if not (offset_x < 0 and offset_x < 18):
+        if offset_x > -1 and offset_x < 19:
             neighbours_cords.append(Move(offset_x, move.y, move.player))
-        if not (offset_y < 0 and offset_y < 18):
+        if offset_y > -1 and offset_y < 19:
             neighbours_cords.append(Move(move.x, offset_y, move.player))
     return neighbours_cords
 

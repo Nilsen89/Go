@@ -9,11 +9,10 @@ class Group(object):
 
         if player == 'X': self.other_player = 'O'
         else: self.other_player = 'X'
-
+        self.liberties = []
         self.update(board)
-
+        
         #self.liberties = self.find_liberties(board)
-        #self.free_liberties = self.find_free_liberties(board)
 
     def add_move(self, move, board):
         self.group.append(move)
@@ -24,22 +23,15 @@ class Group(object):
         for move in self.group:
             neighbours = rules.get_neighbours(move)
             for neighbour in neighbours:
-                if board.get_cell(neighbour) != self.player:
-                    liberties.append(neighbour)
+                if board.get_cell(neighbour) == '.':
+                    if not neighbour in liberties:
+                        liberties.append(neighbour)
         return liberties
-
-    def find_free_liberties(self, board):
-        free_liberties = []
-        for liberty in self.liberties:
-            if not board.get_cell(liberty) == self.other_player:
-                free_liberties.append(liberty)
-        return free_liberties
 
     def update(self, board):
         self.liberties = self.find_liberties(board)
-        self.free_liberties = self.find_free_liberties(board)
 
-        if not self.free_liberties:
+        if not self.liberties:
             self.kill_group(board)
             return False
         return True
