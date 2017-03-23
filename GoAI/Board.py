@@ -20,7 +20,13 @@ class Board(object):
         return self.board[move.x][move.y]
 
     def print_board(self):
-        for line in self.board:
-            for cell in line:
+        cord = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        print(" ", end=" ")
+        for cor in cord:
+            print(cor, end=" ")
+        print("")
+        for line in range(len(self.board)):
+            print(cord[line], end=" ") 
+            for cell in self.board[line]:
                 print(cell, end=" ")
             print("")

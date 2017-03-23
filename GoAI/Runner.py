@@ -20,17 +20,17 @@ def main():
 
     reader = SGFReader("test.sgf")
     counter = 0
-    SFG = True
+    SFG = False
 
     while(True):
 
-        time.sleep(1)
-        #cls()
+        time.sleep(.5)
+        cls()
         board.print_board()
 
-        print(len(all_groups.groups))
-        for group in all_groups.groups:
-            print(group.group)
+        #print(len(all_groups.groups))
+        #for group in all_groups.groups:
+        #    print(group.group)
 
         if SFG:
             move = Move(reader.moves[counter][0], reader.moves[counter][1], player)

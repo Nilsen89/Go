@@ -1,0 +1,17 @@
+### Bugs/Issues
+
+# A Group can have multiple of same free-liberty
+
+# When checking if a move is part of group, updating wrong group
+
+### Features/Todo
+
+# Can separte groups by player instead of one bug all_groups.groups variable.
+
+# Add Ko Rule
+
+# Count captured stones for each player
+
+# Track moves
+
+# Scoring Game
