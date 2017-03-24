@@ -6,12 +6,7 @@ class Board(object):
         self.board = [['.' for x in range(0,19)] for cell in range(0,19)]
 
     def add_move(self, move):
-        if rules.is_legal_move(self, move):
-            self.board[move.x][move.y] = move.player
-            return True
-        else:
-            print("Illegal Move")
-            return False
+        self.board[move.x][move.y] = move.player
 
     def set_cell(self, move, to):
         self.board[move.x][move.y] = to

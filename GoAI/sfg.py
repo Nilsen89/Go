@@ -3,13 +3,13 @@
 class SGFReader(object):
     def __init__(self, path):
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 
-                    'g', 'h', 'i', 'j', 'k', 'l',
-                    'm', 'n', 'o', 'p', 'q', 'r',
-                     's']
+                         'g', 'h', 'i', 'j', 'k', 'l',
+                         'm', 'n', 'o', 'p', 'q', 'r','s']
         self.data = self.readfile(path)
         self.moves = self.analyze(self.data)
 
-    #Function to read the dataset files
+    """ Read the file and store in data array.
+    """
     def readfile(self, file_path):
         data = []
         file_open = open(file_path, "r")
@@ -17,6 +17,8 @@ class SGFReader(object):
             data.append(line)
         return data
 
+    """ Analyze the data, and get moves.
+    """
     def analyze(self, data):
         moves = []
         for line in self.data:

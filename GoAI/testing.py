@@ -24,3 +24,21 @@ def print_group_to_move(board, all_groups, move):
                 board.set_cell(move, move.player)
 
     board.print_board()
+
+def find_group(board, move):
+    
+    group = [move]
+    opened = [move]
+    closed = []
+    
+    while(len(opened) > 0):
+        neighbours = analyze.get_neighbours(opened[0])
+        closed.append(opened.pop(0))
+
+        for neighbour in neighbours:
+            if board.get_cell(neighbour) == move.player:
+                if not neighbour in closed:
+                    temp_move = Move(neighbour.x, neighbour.y, move.player)
+                    group.append(temp_move)
+                    opened.append(temp_move)
+    return Group(group, move.player)
